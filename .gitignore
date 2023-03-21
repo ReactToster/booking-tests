@@ -1,0 +1,15 @@
+.gradle
+/build/
+**/out
+**/build
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+*.class
+/out/
+
+### EXTRA
+.DS_Store

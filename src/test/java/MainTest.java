@@ -7,6 +7,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class MainTest {
@@ -14,10 +15,11 @@ public class MainTest {
     List<WebElement> searchInputList;
     WebElement searchDateBtn;
     List<WebElement> searchDateTableList;
-
     WebElement searchOccupancyConfigBtn;
-
     WebElement searchSubmitBtn;
+
+    LocalDate checkInDate = LocalDate.now().plusDays(1);
+    LocalDate checkOutDate = LocalDate.now().plusDays(3);
 
     @BeforeClass
     void setUpDriver() {
@@ -32,14 +34,13 @@ public class MainTest {
         searchInputList = driver.findElements(By.cssSelector(".hero-banner-searchbox form > div input"));
         searchDateBtn = driver.findElement(By.xpath("//button[@data-testid='date-display-field-start']"));
         searchOccupancyConfigBtn = driver.findElement(By.xpath("//button[@data-testid='occupancy-config']"));
-
     }
 
     @Test
     void testSimpleSearch() {
         dismissCookies();
         insertLocation("Warsaw");
-        pickCheckInDateAndCheckOutDate("2023-03-28", "2023-03-30");
+        pickCheckInDateAndCheckOutDate(checkInDate.toString(), checkOutDate.toString());
         insertOccupancyDetails();
         submitSearchDetails();
     }

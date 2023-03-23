@@ -11,6 +11,13 @@ import java.util.List;
 
 public class MainTest {
     WebDriver driver;
+    List<WebElement> searchInputList;
+    WebElement searchDateBtn;
+    List<WebElement> searchDateTableList;
+
+    WebElement searchOccupancyConfigBtn;
+
+    WebElement searchSubmitBtn;
 
     @BeforeClass
     void setUpDriver() {
@@ -20,32 +27,48 @@ public class MainTest {
                 "--remote-allow-origins=*"
         );
         driver = new ChromeDriver(options);
-
         driver.get("https://www.booking.com/index.html?label=gen173nr-1BCAEoggI46AdIM1gEaLYBiAEBmAEeuAEHyAEM2AEB6AEBiAIBqAIDuAKWveygBsACAdICJDdhNDllMDA5LWY1MjgtNGVmNi1iNGY1LTc5Mjg0NGY3Yzc2YdgCBeACAQ&sid=fcae6461057870fff28ff7a2e583e8ed&keep_landing=1&sb_price_type=total&lang=en-us&soz=1&lang_changed=1");
+
+        searchInputList = driver.findElements(By.cssSelector(".hero-banner-searchbox form > div input"));
+        searchDateBtn = driver.findElement(By.xpath("//button[@data-testid='date-display-field-start']"));
+        searchOccupancyConfigBtn = driver.findElement(By.xpath("//button[@data-testid='occupancy-config']"));
+
     }
 
     @Test
     void testSimpleSearch() {
+        dismissCookies();
+        insertLocation("Warsaw");
+        pickCheckInDateAndCheckOutDate("2023-03-28", "2023-03-30");
+        insertOccupancyDetails();
+        submitSearchDetails();
+    }
+
+    private void dismissCookies() {
         WebElement cookieBtn = driver.findElement(By.cssSelector("#onetrust-accept-btn-handler"));
         cookieBtn.click();
-        List<WebElement> searchInputList = driver.findElements(By.cssSelector(".hero-banner-searchbox form > div input"));
+    }
 
+    private void insertLocation(String location) {
         WebElement searchLocationInput = searchInputList.get(0);
-        searchLocationInput.sendKeys("Warsaw");
+        searchLocationInput.sendKeys(location);
+    }
 
-        WebElement searchDateBtn = driver.findElement(By.xpath("//button[@data-testid='date-display-field-start']"));
+    private void pickCheckInDateAndCheckOutDate(String checkInDate, String checkOutDate) {
         searchDateBtn.click();
 
-        List<WebElement> searchDateTableList = driver.findElements(By.xpath("//table[@role='grid']"));
-        WebElement searchDateTableFromBtn = searchDateTableList.get(0).findElement(By.xpath("//tbody/tr/td/span[@data-date='2023-03-23']"));
+        searchDateTableList = driver.findElements(By.xpath("//table[@role='grid']"));
+
+        WebElement searchDateTableFromBtn = searchDateTableList.get(0).findElement(By.xpath("//tbody/tr/td/span[@data-date='" + checkInDate + "']"));
         searchDateTableFromBtn.click();
 
-        WebElement searchDateTableToBtn = searchDateTableList.get(0).findElement(By.xpath("//tbody/tr/td/span[@data-date='2023-03-25']"));
+        WebElement searchDateTableToBtn = searchDateTableList.get(0).findElement(By.xpath("//tbody/tr/td/span[@data-date='" + checkOutDate + "']"));
         searchDateTableToBtn.click();
 
         searchDateBtn.click();
+    }
 
-        WebElement searchOccupancyConfigBtn = driver.findElement(By.xpath("//button[@data-testid='occupancy-config']"));
+    private void insertOccupancyDetails() {
         searchOccupancyConfigBtn.click();
 
         List<WebElement> searchOccupancyBtnList = driver.findElements(By.xpath("//div[@data-testid='occupancy-popup']/div/div/div/button"));
@@ -62,8 +85,10 @@ public class MainTest {
         List<WebElement> searchOccupancySecondChildAgeSelectOptions = searchOccupancyChildAgeSelectList.get(1).findElements(By.xpath("//option[@value='7']"));
         searchOccupancyChildAgeSelectList.get(1).click();
         searchOccupancySecondChildAgeSelectOptions.get(1).click();
+    }
 
-        WebElement searchSubmitBtn = driver.findElement(By.xpath("//button[@type='submit']"));
+    private void submitSearchDetails() {
+        searchSubmitBtn = driver.findElement(By.xpath("//button[@type='submit']"));
         searchSubmitBtn.click();
     }
 

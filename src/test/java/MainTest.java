@@ -12,6 +12,8 @@ import org.testng.asserts.Assertion;
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.testng.Assert.assertTrue;
+
 public class MainTest {
     WebDriver driver;
     List<WebElement> searchInputList;
@@ -42,14 +44,14 @@ public class MainTest {
 
     @Test
     void testSimpleSearch() {
+        //when
         dismissCookies();
         insertLocation("Warsaw");
         pickCheckInDateAndCheckOutDate(checkInDate.toString(), checkOutDate.toString());
         insertOccupancyDetails();
         submitSearchDetails();
-
-        searchResults = driver.findElements(By.xpath("//div[@data-testid='property-card']"));
-        Assert.assertTrue(searchResults.size() > 0);
+        //then
+        assertTrue(isThereAnySearchResult());
     }
 
     private void dismissCookies() {
@@ -98,6 +100,11 @@ public class MainTest {
     private void submitSearchDetails() {
         searchSubmitBtn = driver.findElement(By.xpath("//button[@type='submit']"));
         searchSubmitBtn.click();
+    }
+
+    private boolean isThereAnySearchResult() {
+        searchResults = driver.findElements(By.xpath("//div[@data-testid='property-card']"));
+        return searchResults.size() > 0;
     }
 
     @AfterClass

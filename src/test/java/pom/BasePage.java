@@ -13,7 +13,7 @@ public class BasePage {
     List<WebElement> searchDateTableList;
     public WebElement searchOccupancyConfigBtn;
     WebElement searchSubmitBtn;
-    List<WebElement> searchResults;
+
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -71,8 +71,5 @@ public class BasePage {
         searchSubmitBtn.click();
     }
 
-    public boolean isThereAnySearchResult() {
-        searchResults = driver.findElements(By.xpath("//div[@data-testid='property-card']"));
-        return searchResults.size() > 0;
-    }
+
 }

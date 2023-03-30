@@ -1,3 +1,5 @@
+package pom;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -5,13 +7,21 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class BasePage {
-    public static WebDriver driver;
-    List<WebElement> searchInputList;
-    WebElement searchDateBtn;
+    protected WebDriver driver;
+    public List<WebElement> searchInputList;
+    public WebElement searchDateBtn;
     List<WebElement> searchDateTableList;
-    WebElement searchOccupancyConfigBtn;
+    public WebElement searchOccupancyConfigBtn;
     WebElement searchSubmitBtn;
     List<WebElement> searchResults;
+
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
 
     public void dismissCookies() {
         WebElement cookieBtn = driver.findElement(By.cssSelector("#onetrust-accept-btn-handler"));

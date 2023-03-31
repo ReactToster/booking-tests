@@ -2,20 +2,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.testng.asserts.Assertion;
 import pom.BasePage;
+import pom.MainPage;
+
+import java.time.Duration;
 
 public class BaseTest {
     protected WebDriver driver;
+    protected MainPage mainPage;
+    private long initialDelay = 3;
 
-    public BaseTest(WebDriver driver) {
-        this.driver = driver;
-    }
-
-    @BeforeClass
+    @BeforeTest
     void setUpDriver() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments(
@@ -23,15 +22,14 @@ public class BaseTest {
                 "--remote-allow-origins=*"
         );
         driver = new ChromeDriver(options);
+        mainPage = new MainPage(driver);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(initialDelay));
+        System.out.println("before in BaseTest");
     }
 
-    @Test
-    void testIsWebDriverNotNull() {
-        Assert.assertNotNull(driver);
-    }
-
-    @AfterClass
+    @AfterTest
     void tearDown() {
+        System.out.println("after in BaseTest");
         driver.quit();
     }
 }

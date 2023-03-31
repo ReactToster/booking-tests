@@ -17,6 +17,7 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
+
     }
 
     public WebDriver getDriver() {
@@ -26,6 +27,12 @@ public class BasePage {
     public void dismissCookies() {
         WebElement cookieBtn = driver.findElement(By.cssSelector("#onetrust-accept-btn-handler"));
         cookieBtn.click();
+    }
+
+    public void locateFormElements() {
+        searchInputList = driver.findElements(By.cssSelector(".hero-banner-searchbox form > div input"));
+        searchDateBtn = driver.findElement(By.xpath("//button[@data-testid='date-display-field-start']"));
+        searchOccupancyConfigBtn = driver.findElement(By.xpath("//button[@data-testid='occupancy-config']"));
     }
 
     public void insertLocation(String location) {

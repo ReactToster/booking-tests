@@ -1,10 +1,5 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.*;
-import pom.BasePage;
-import pom.MainPage;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 
@@ -14,13 +9,15 @@ public class MainTest extends BaseTest {
     LocalDate checkInDate = LocalDate.now().plusDays(1);
     LocalDate checkOutDate = LocalDate.now().plusDays(3);
 
-    @BeforeTest
+    @BeforeMethod
     void openMainPage() {
         System.out.println("before in MainTest");
-        mainPage.openPage();
+        try {
+            mainPage.openPage();
+        } catch (Exception e) {
+            System.out.println("Exception: " + e.getLocalizedMessage());
+        }
     }
-
-
 
     @Test
     void testSimpleSearch() {

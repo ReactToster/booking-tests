@@ -49,4 +49,13 @@ public class MainTest extends BaseTest {
         //then
         assertTrue(mainPage.isTripTypeCarouselCityTabSelected());
     }
+
+    @Test
+    void testDestinationTabsRegionIsSelectedOnStart() {
+        //when
+        mainPage.dismissCookies();
+        mainPage.locateDestinationsTabs();
+        //then
+        assertTrue(mainPage.isDestinationsRegionTabSelected());
+    }
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 public class MainPage extends BasePage {
     List<WebElement> tripTypeCarouselTabsList;
+    WebElement destinationRegionTab;
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -27,6 +28,18 @@ public class MainPage extends BasePage {
     }
 
     public boolean isTripTypeCarouselCityTabSelected() {
-        return tripTypeCarouselTabsList.get(0).getDomAttribute("aria-selected").contentEquals("true");
+        return isAriaSelectedAttributeTrue(tripTypeCarouselTabsList.get(0));
+    }
+
+    private boolean isAriaSelectedAttributeTrue(WebElement webElement) {
+        return webElement.getDomAttribute("aria-selected").contentEquals("true");
+    }
+
+    public void locateDestinationsTabs() {
+        destinationRegionTab = driver.findElement(By.cssSelector(".bui-tab__link--selected"));
+    }
+
+    public boolean isDestinationsRegionTabSelected() {
+        return isAriaSelectedAttributeTrue(destinationRegionTab);
     }
 }

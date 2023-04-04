@@ -31,4 +31,13 @@ public class MainTest extends BaseTest {
         //then
         assertTrue(mainPage.navigateToSearchResults().isThereAnySearchResult());
     }
+
+    @Test
+    void testHeaderAccommodationTabIsSelectedOnStart() {
+        //when
+        mainPage.dismissCookies();
+        mainPage.locateHeaderTabs();
+        //then
+        assertTrue(mainPage.isHeaderAccommodationTabSelected());
+    }
 }

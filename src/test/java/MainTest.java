@@ -40,4 +40,13 @@ public class MainTest extends BaseTest {
         //then
         assertTrue(mainPage.isHeaderAccommodationTabSelected());
     }
+
+    @Test
+    void testTripTypeCarouselTabIsSelectedOnStart() {
+        //when
+        mainPage.dismissCookies();
+        mainPage.locateTripTypeCarouselTabs();
+        //then
+        assertTrue(mainPage.isTripTypeCarouselCityTabSelected());
+    }
 }

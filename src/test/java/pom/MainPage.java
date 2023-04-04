@@ -2,8 +2,13 @@ package pom;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class MainPage extends BasePage {
+    List<WebElement> tripTypeCarouselTabsList;
+
     public MainPage(WebDriver driver) {
         super(driver);
     }
@@ -17,5 +22,11 @@ public class MainPage extends BasePage {
     }
 
 
+    public void locateTripTypeCarouselTabs() {
+        tripTypeCarouselTabsList = driver.findElements(By.xpath("//button[@data-testid=\"webcore-filter-carousel-tab-trigger\"]"));
+    }
 
+    public boolean isTripTypeCarouselCityTabSelected() {
+        return tripTypeCarouselTabsList.get(0).getDomAttribute("aria-selected").contentEquals("true");
+    }
 }

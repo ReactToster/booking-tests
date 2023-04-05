@@ -1,8 +1,15 @@
 package pom;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class MainPage extends BasePage {
+    List<WebElement> tripTypeCarouselTabsList;
+    WebElement destinationRegionTab;
+
     public MainPage(WebDriver driver) {
         super(driver);
     }
@@ -15,4 +22,24 @@ public class MainPage extends BasePage {
         return new SearchResultsPage(driver);
     }
 
+
+    public void locateTripTypeCarouselTabs() {
+        tripTypeCarouselTabsList = driver.findElements(By.xpath("//button[@data-testid=\"webcore-filter-carousel-tab-trigger\"]"));
+    }
+
+    public boolean isTripTypeCarouselCityTabSelected() {
+        return isAriaSelectedAttributeTrue(tripTypeCarouselTabsList.get(0));
+    }
+
+    private boolean isAriaSelectedAttributeTrue(WebElement webElement) {
+        return webElement.getDomAttribute("aria-selected").contentEquals("true");
+    }
+
+    public void locateDestinationsTabs() {
+        destinationRegionTab = driver.findElement(By.cssSelector(".bui-tab__link--selected"));
+    }
+
+    public boolean isDestinationsRegionTabSelected() {
+        return isAriaSelectedAttributeTrue(destinationRegionTab);
+    }
 }

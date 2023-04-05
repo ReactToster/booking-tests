@@ -13,6 +13,7 @@ public class BasePage {
     List<WebElement> searchDateTableList;
     public WebElement searchOccupancyConfigBtn;
     WebElement searchSubmitBtn;
+    WebElement headerAccommodationsTab;
 
 
     public BasePage(WebDriver driver) {
@@ -79,4 +80,11 @@ public class BasePage {
     }
 
 
+    public void locateHeaderTabs() {
+        headerAccommodationsTab = driver.findElement(By.xpath("//a[@id=\"accommodations\"]/.."));
+    }
+
+    public boolean isHeaderAccommodationTabSelected() {
+        return headerAccommodationsTab.getDomAttribute("class").contains(" ");
+    }
 }

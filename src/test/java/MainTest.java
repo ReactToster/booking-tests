@@ -31,4 +31,31 @@ public class MainTest extends BaseTest {
         //then
         assertTrue(mainPage.navigateToSearchResults().isThereAnySearchResult());
     }
+
+    @Test
+    void testHeaderAccommodationTabIsSelectedOnStart() {
+        //when
+        mainPage.dismissCookies();
+        mainPage.locateHeaderTabs();
+        //then
+        assertTrue(mainPage.isHeaderAccommodationTabSelected());
+    }
+
+    @Test
+    void testTripTypeCarouselTabIsSelectedOnStart() {
+        //when
+        mainPage.dismissCookies();
+        mainPage.locateTripTypeCarouselTabs();
+        //then
+        assertTrue(mainPage.isTripTypeCarouselCityTabSelected());
+    }
+
+    @Test
+    void testDestinationTabsRegionIsSelectedOnStart() {
+        //when
+        mainPage.dismissCookies();
+        mainPage.locateDestinationsTabs();
+        //then
+        assertTrue(mainPage.isDestinationsRegionTabSelected());
+    }
 }

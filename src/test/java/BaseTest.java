@@ -2,7 +2,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import pom.MainPage;
 
 import java.time.Duration;
@@ -12,7 +14,7 @@ public class BaseTest {
     protected MainPage mainPage;
     private final long initialDelay = 5;
 
-    @BeforeClass
+    @BeforeMethod
     void setUpDriver() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments(
@@ -25,7 +27,7 @@ public class BaseTest {
         System.out.println("before in BaseTest");
     }
 
-    @AfterClass
+    @AfterMethod
     void tearDown() {
         System.out.println("after in BaseTest");
         driver.quit();

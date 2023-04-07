@@ -14,11 +14,11 @@ public class BasePage {
     public WebElement searchOccupancyConfigBtn;
     WebElement searchSubmitBtn;
     WebElement headerAccommodationsTab;
+    WebElement bookingLogo;
 
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-
     }
 
     public WebDriver getDriver() {
@@ -86,5 +86,17 @@ public class BasePage {
 
     public boolean isHeaderAccommodationTabSelected() {
         return headerAccommodationsTab.getDomAttribute("class").contains(" ");
+    }
+
+    public void locateBookingLogo() {
+        bookingLogo = driver.findElement(By.xpath("//a[@data-testid=\"header-booking-logo\"]"));
+    }
+
+    public void clickBookingLogo() {
+        bookingLogo.click();
+    }
+
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
     }
 }

@@ -3,7 +3,7 @@ import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 public class MainTest extends BaseTest {
     LocalDate checkInDate = LocalDate.now().plusDays(1);
@@ -57,5 +57,16 @@ public class MainTest extends BaseTest {
         mainPage.locateDestinationsTabs();
         //then
         assertTrue(mainPage.isDestinationsRegionTabSelected());
+    }
+
+    @Test
+    void testBookingLogoShouldDirectToMainPage() {
+        //when
+        mainPage.dismissCookies();
+        mainPage.locateBookingLogo();
+        mainPage.clickBookingLogo();
+        mainPage.locateTripTypeCarouselTabs();
+        //then
+        assertFalse(mainPage.isTripTypeCarouselCityTabsEmpty());
     }
 }

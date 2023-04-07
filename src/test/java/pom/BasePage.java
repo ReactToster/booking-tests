@@ -21,10 +21,6 @@ public class BasePage {
         this.driver = driver;
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
-
     public void dismissCookies() {
         WebElement cookieBtn = driver.findElement(By.cssSelector("#onetrust-accept-btn-handler"));
         cookieBtn.click();
@@ -94,9 +90,5 @@ public class BasePage {
 
     public void clickBookingLogo() {
         bookingLogo.click();
-    }
-
-    public String getCurrentUrl() {
-        return driver.getCurrentUrl();
     }
 }

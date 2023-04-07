@@ -44,10 +44,6 @@ public class MainPage extends BasePage {
         return isAriaSelectedAttributeTrue(destinationRegionTab);
     }
 
-    public String getMainPageUrl() {
-        return mainPageUrl;
-    }
-
     public boolean isTripTypeCarouselCityTabsEmpty() {
         return tripTypeCarouselTabsList.isEmpty();
     }

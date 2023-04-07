@@ -4,7 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.io.FileInputStream;
 import java.util.List;
+import java.util.Properties;
 
 public class BasePage {
     protected WebDriver driver;
@@ -15,6 +17,7 @@ public class BasePage {
     WebElement searchSubmitBtn;
     WebElement headerAccommodationsTab;
     WebElement bookingLogo;
+    public Properties bookingProperties;
 
 
     public BasePage(WebDriver driver) {
@@ -90,5 +93,11 @@ public class BasePage {
 
     public void clickBookingLogo() {
         bookingLogo.click();
+    }
+
+    public void readPropertiesFile() throws Exception {
+        FileInputStream fileInputStream = new FileInputStream("booking-properties.properties");
+        bookingProperties = new Properties();
+        bookingProperties.load(fileInputStream);
     }
 }

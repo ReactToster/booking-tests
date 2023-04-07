@@ -13,7 +13,7 @@ public class BaseTest {
     private final long initialDelay = 5;
 
     @BeforeMethod
-    void setUpDriver() {
+    void setUpDriver() throws Exception {
         ChromeOptions options = new ChromeOptions();
         options.addArguments(
                 "start-maximized",
@@ -22,6 +22,7 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(initialDelay));
         mainPage = new MainPage(driver);
+        mainPage.readPropertiesFile();
         System.out.println("before in BaseTest");
     }
 

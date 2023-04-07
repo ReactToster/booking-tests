@@ -15,7 +15,6 @@ public class MainPage extends BasePage {
     }
 
     public void openPage() {
-        System.out.println(bookingProperties.getProperty("mainPageUrl"));
         driver.get(bookingProperties.getProperty("mainPageUrl"));
     }
 

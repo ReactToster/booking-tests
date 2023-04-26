@@ -51,6 +51,16 @@ public class MainTest extends BaseTest {
     }
 
     @Test
+    void testHoverStateTripTypeCarouselTab() {
+        //when
+        mainPage.dismissCookies();
+        mainPage.locateTripTypeCarouselRomanceTab();
+        mainPage.hoverOnTripTypeCarouselType();
+        //then
+        assertTrue(mainPage.isTripTypeCarouselTabHoverStateCorrect());
+    }
+
+    @Test
     void testDestinationTabsRegionIsSelectedOnStart() {
         //when
         mainPage.dismissCookies();
